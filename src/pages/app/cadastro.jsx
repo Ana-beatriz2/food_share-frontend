@@ -1,49 +1,79 @@
-export function UserRegister() {
-  const formFields = [
-    { label: "Nome Completo", id: "fullName", placeholder: "Sofia Leal", required: true },
-    { label: "CNPJ", id: "cnpj" },
-    { label: "CPF", id: "cpf", placeholder: "111.111.111-11" },
-    { label: "Email", id: "email", type: "email", placeholder: "sofialealtexeira@gmail.com", required: true },
-    { label: "Telefone", id: "phone", type: "tel", placeholder: "(21)11111-1111", required: true },
-    { label: "Tipo Usuário", id: "userType", placeholder: "Selecione o Tipo de Usuário" },
-    { label: "Estado", id: "state", placeholder: "Rio de Janeiro", required: true },
-    { label: "Cidade", id: "city", placeholder: "Rio de Janeiro", required: true },
-    { label: "Bairro", id: "neighborhood", placeholder: "Cachambi", required: true },
-    { label: "Logradouro", id: "address", placeholder: "Rua da Paz, 777", required: true },
-    { label: "Complemento", id: "addressComplement", placeholder: "Casa 7", required: true },
-    { label: "Senha", id: "password", type: "password"}
-  ];
+import { useForm } from "react-hook-form";import axios from "axios";
+import Logo from "@/components/ui/logo";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+export function UserRegister() {
+  const { register, handleSubmit } = useForm();
+  const baseUrl = "http://localhost:3000/api"
+
+  const onSubmit = async (data) => {
+    try {
+      const transformedData = { ...data };
+
+      Object.keys(transformedData).forEach((key) => {
+        if (transformedData[key] === "") {
+          transformedData[key] = null;
+        }
+      });
+
+      await axios.post(`${baseUrl}/usuario`, transformedData);
+      alert("Cadastro realizado com sucesso")
+    } catch (error) {
+      alert(`Erro ao cadastrar: ${error.response.data.message}`);
+    }
   };
 
   return (
-    <div className="flex overflow-hidden flex-col items-center pb-10 min-h-screen bg-orange-50">
-      <div className="flex flex-col items-center px-5 py-0 w-full max-w-[453px] max-sm:px-4 max-sm:py-0">
-        Logo
-        <div className="mb-8 text-3xl text-primary font-bold max-sm:text-3xl">
-          Seja bem-vindo(a)!
-        </div>
-        <form onSubmit={handleSubmit} className="w-full">
-          {formFields.map(({ id, label, type = "text", placeholder, required }) => (
+    <div className="flex overflow-hidden flex-col items-center pb-10 min-h-screen bg-background">
+      <div className="flex flex-col items-center px-5 py-0 w-full max-w-[453px]">
+        <Logo />
+        <div className="mt-8 mb-8 text-3xl text-primary font-bold">Seja bem-vindo(a)!</div>
+        
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          {[ 
+            { label: "Nome Completo", id: "nome", placeholder: "Sofia Leal", required: true },
+            { label: "CNPJ", id: "cnpj" },
+            { label: "CPF", id: "cpf", placeholder: "11111111111" },
+            { label: "Email", id: "email", type: "email", placeholder: "sofialealtexeira@gmail.com", required: true },
+            { label: "Telefone", id: "telefone", type: "tel", placeholder: "21111111111", required: true },
+            { label: "Estado", id: "estado", placeholder: "RJ", required: true },
+            { label: "Cidade", id: "cidade", placeholder: "Rio de Janeiro", required: true },
+            { label: "Bairro", id: "bairro", placeholder: "Cachambi", required: true },
+            { label: "Logradouro", id: "logradouro", placeholder: "Rua da Paz, 777", required: true },
+            { label: "Complemento", id: "complemento", placeholder: "Casa 7", required: true },
+            { label: "Senha", id: "senha", type: "password", required: true },
+          ].map(({ id, label, type = "text", placeholder, required }) => (
             <div key={id} className="mb-4">
               <label htmlFor={id} className="block mb-1 font-bold text-secondary text-left">
                 {label} {required && <span className="text-secondary">*</span>}
               </label>
               <input
+                {...register(id, { required })}
                 id={id}
                 type={type}
-                placeholder={placeholder || ""}
-                required={required}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none placeholder-[#955306]"
+                placeholder={placeholder}
+                className="w-full px-3 py-2 bg-background border shadow-md focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder-[#955306]"
               />
             </div>
           ))}
 
-          <button 
+
+          <div className="mb-4">
+            <label htmlFor="tipoUsuario" className="block mb-1 font-bold text-secondary text-left">
+              Tipo Usuário <span className="text-secondary">*</span>
+            </label>
+            <select
+              {...register("tipoUsuario", { required: true })}
+              id="tipoUsuario"
+              className="w-full px-3 py-2 bg-background border shadow-md focus:outline-none focus:ring-2 focus:ring-orange-300"
+            >
+              <option value="receptor">Receptor</option>
+              <option value="doador">Doador</option>
+            </select>
+          </div>
+
+          <button
             type="submit"
-            className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-[0_4px_4px_rgba(0,0,0,0.25)] max-sm:text-xl"
+            className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
           >
             CONTINUAR
           </button>
@@ -52,3 +82,4 @@ export function UserRegister() {
     </div>
   );
 }
+
