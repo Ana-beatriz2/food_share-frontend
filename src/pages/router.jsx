@@ -4,6 +4,7 @@ import Login from "./auth/login";
 import DefaultLayout from "./layouts/app/defaultLayout";
 import AuthLayout from "./layouts/auth/authLayout";
 import { UserRegister } from "./app/cadastro";
+import { CadastroPostagem } from "./app/cadastroPostagem";
 
 export default function Router() {
     return (
@@ -16,6 +17,9 @@ export default function Router() {
             </Route>
             <Route path="/login" element={<DefaultLayout/>} >
                 <Route path="/login" element={<Login/>} />
+            </Route>
+            <Route path="/cadastroPostagem" element={<DefaultLayout/>}>
+                <Route path="/cadastroPostagem" element={<CadastroPostagem/>} />
             </Route>
         </Routes>
     )
