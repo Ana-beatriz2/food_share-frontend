@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Inicio from "./app/inicio";
 import Login from "./auth/login";
 import DefaultLayout from "./layouts/app/defaultLayout";
-import AuthLayout from "./layouts/auth/authLayout";
+import DeafultHeader from "./layouts/app/deafultHeader";
 import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
 
@@ -18,7 +18,7 @@ export default function Router() {
             <Route path="/login" element={<DefaultLayout/>} >
                 <Route path="/login" element={<Login/>} />
             </Route>
-            <Route path="/cadastroPostagem" element={<DefaultLayout/>}>
+            <Route path="/cadastroPostagem" element={<DeafultHeader/>}>
                 <Route path="/cadastroPostagem" element={<CadastroPostagem/>} />
             </Route>
         </Routes>
