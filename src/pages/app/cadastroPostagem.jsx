@@ -9,10 +9,9 @@ export function CadastroPostagem() {
     const [produtos, setProdutos] = useState([]);
   
     useEffect(() => {
-        // Fetch products from the API
         const fetchProdutos = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/produtos`); // Ajuste o endpoint conforme necessário
+                const response = await axios.get(`${baseUrl}/produtos`); 
                 setProdutos(response.data);
             } catch (error) {
                 alert(`Erro ao buscar produtos: ${error.response.data.message}`);
@@ -32,10 +31,9 @@ export function CadastroPostagem() {
                 }
             });
 
-            // Aqui você pode enviar o arquivo de imagem se for necessário fazer upload
             const formData = new FormData();
             formData.append('produto', JSON.stringify(transformedData));
-            formData.append('foto', data.foto[0]); // Adicionando o arquivo de imagem
+            formData.append('foto', data.foto[0]); 
             
             await axios.post(`${baseUrl}/produto`, formData, {
                 headers: {
@@ -52,11 +50,9 @@ export function CadastroPostagem() {
     return (
         <div className="flex overflow-hidden flex-col items-center pb-2210 min-h-screen bg-background">
             <div className="flex flex-col items-center px-5 py-0 w-full max-w-[453px]">
-                <Logo />
                 <div className="mt-8 mb-8 text-3xl text-primary font-bold">Cadastrar Postagem</div>
                 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 mt-14 max-md:mt-10">
-                    {/* Produto com select */}
                     <div className="flex flex-col gap-3.5">
                         <label htmlFor="nomeProduto" className="text-xl font-bold text-yellow-800">
                             *Nome Produto:
@@ -77,7 +73,6 @@ export function CadastroPostagem() {
                     <InputField label="*Quantidade:" placeholder="Digite a Quantidade do Produto" register={register("quantidade")} />
                     <InputField label="*Validade:" placeholder="Validade do Produto" register={register("validade")} />
                     
-                    {/* Campo de upload de imagem */}
                     <div className="flex flex-col gap-3.5">
                         <label htmlFor="foto" className="text-xl font-bold text-yellow-800">
                             Foto do Alimento:
