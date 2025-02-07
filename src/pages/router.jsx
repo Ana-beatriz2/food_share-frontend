@@ -14,7 +14,7 @@ export default function Router() {
             <Route path="/cadastro" element={<DefaultLayout/>}>
                 <Route path="/cadastro" element={<UserRegister/>} />
             </Route>
-            <Route path="/login" element={<AuthLayout/>} >
+            <Route path="/login" element={<DefaultLayout/>} >
                 <Route path="/login" element={<Login/>} />
             </Route>
         </Routes>
