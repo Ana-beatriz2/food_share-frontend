@@ -11,7 +11,7 @@ export default function LoginPage() {
       const response = await axios.post(`${baseUrl}/login`, data);
       
       alert("Login realizado com sucesso!");
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data);
 
     } catch (error) {
       alert(`Erro ao fazer login: ${error.response?.data?.message || "Erro desconhecido"}`);
