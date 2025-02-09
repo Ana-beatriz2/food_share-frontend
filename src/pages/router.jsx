@@ -23,8 +23,8 @@ export default function Router() {
             <Route path="/inicioReceptor" element={<DefaultHeaderReceptor />}>
                 <Route index element={<InicioReceptor />} />
             </Route>
-            <Route path="/cadastroPostoDeColeta" element={<DefaultLayout/>}>
-                <Route path="/cadastroPostoDeColeta" element={<CadastroPostoDeColeta/>} />
+            <Route path="/cadastroPostoDeColeta" element={<DefaultHeaderDoador />}>
+                <Route index element={<CadastroPostoDeColeta />} />
             </Route>
         </Routes>
     )
