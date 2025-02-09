@@ -5,6 +5,7 @@ import DefaultLayout from "./layouts/app/defaultLayout";
 import AuthLayout from "./layouts/auth/authLayout";
 import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
+import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 
 export default function Router() {
     return (
@@ -20,6 +21,9 @@ export default function Router() {
             </Route>
             <Route path="/cadastroPostagem" element={<DefaultLayout/>}>
                 <Route path="/cadastroPostagem" element={<CadastroPostagem/>} />
+            </Route>
+            <Route path="/cadastroPostoDeColeta" element={<DefaultLayout/>}>
+                <Route path="/cadastroPostoDeColeta" element={<CadastroPostoDeColeta/>} />
             </Route>
         </Routes>
     )
