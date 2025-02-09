@@ -3,7 +3,7 @@ import logo from '../../../assets/logo-bege.png';
 
 export default function DefaultHeaderDoador() {
     return (
-        <div>
+        <div className="h-screen flex flex-col">
             <header className="flex justify-between items-center px-20 py-5 w-full bg-primary">
                 <div className="flex items-center gap-6">
                     <img src={logo} alt="Logo" className="mb-2" />
