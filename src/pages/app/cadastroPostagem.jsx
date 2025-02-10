@@ -8,7 +8,6 @@ export function CadastroPostagem() {
     const [postosColeta, setPostosColeta] = useState([]);
 
     useEffect(() => {
-        // Buscar produtos
         const fetchProdutos = async () => {
             try {
                 const response = await api.get(`/produto`);
@@ -18,7 +17,6 @@ export function CadastroPostagem() {
             }
         };
 
-        // Buscar postos de coleta
         const fetchPostosColeta = async () => {
             try {
                 const response = await api.get(`/postoColeta/doador`);
@@ -60,7 +58,7 @@ export function CadastroPostagem() {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 mt-14 max-md:mt-10">
                     
-                    {/* Selecione um Produto */}
+
                     <div className="flex flex-col gap-3.5">
                         <label htmlFor="nomeProduto" className="text-xl font-bold text-secondary">
                             *Nome Produto:
@@ -79,7 +77,7 @@ export function CadastroPostagem() {
                         </select>
                     </div>
 
-                    {/* Selecione um Posto de Coleta */}
+
                     <div className="flex flex-col gap-3.5">
                         <label htmlFor="postoColeta" className="text-xl font-bold text-secondary">
                             *Posto de Coleta:
@@ -98,11 +96,10 @@ export function CadastroPostagem() {
                         </select>
                     </div>
 
-                    {/* Campos de Entrada */}
                     <InputField label="*Quantidade:" placeholder="Digite a Quantidade do Produto" register={register("quantidade")} />
                     <InputField label="*Validade:" placeholder="Validade do Produto" register={register("validade")} />
 
-                    {/* Upload de Foto */}
+
                     <div className="flex flex-col gap-3.5">
                         <label htmlFor="foto" className="text-xl font-bold text-secondary">
                             Foto do Alimento:
@@ -128,7 +125,6 @@ export function CadastroPostagem() {
 
                     <InputField label="Observação:" placeholder="Deseja Acrescentar alguma Observação da Doação?" register={register("observacao")} />
 
-                    {/* Botão de Finalizar */}
                     <button
                         type="submit"
                         className="px-0 py-2.5 mt-12 mb-7 w-full text-2xl font-bold text-center text-secondary bg-third cursor-pointer border-[none] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
@@ -141,7 +137,7 @@ export function CadastroPostagem() {
     );
 }
 
-// Componente de Input
+
 const InputField = ({ label, placeholder, className, register }) => {
     const id = React.useId();
 
