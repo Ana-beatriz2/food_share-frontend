@@ -24,7 +24,7 @@ export default function InicioReceptor() {
     }, []);
 
     return (
-        <div className="flex overflow-hidden flex-col pb-20 bg-orange-50">
+        <div className="flex overflow-auto flex-col pb-20 bg-orange-50">
             <div className="px-5 py-0 mx-auto my-0 w-full max-w-[1200px]">
                 <h1 className="mx-0 mt-10 mb-12 text-4xl font-bold text-center text-primary">
                     Doações Disponíveis
