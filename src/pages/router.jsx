@@ -8,6 +8,7 @@ import DefaultHeaderReceptor from "./layouts/app/deafultHeaderReceptor";
 import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
+import InicioPostoDeColeta from "./app/inicioPostoDeColeta";
 
 export default function Router() {
     return (
@@ -25,6 +26,9 @@ export default function Router() {
             </Route>
             <Route path="/cadastroPostoDeColeta" element={<DefaultHeaderDoador />}>
                 <Route index element={<CadastroPostoDeColeta />} />
+            </Route>
+            <Route path="/inicioPostoDeColeta" element={<DefaultHeaderDoador />}>
+                <Route index element={<InicioPostoDeColeta />} />
             </Route>
         </Routes>
     )
