@@ -1,23 +1,42 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Logo from "@/components/ui/logo";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const baseUrl = "http://localhost:3000/api";
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(`${baseUrl}/login`, data);
+      const token = response.data;
+
+      const userId = jwtDecode(token).id;
+      
+      const userResponse = await axios.get(`${baseUrl}/usuario/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      console.log(userResponse);
+      localStorage.setItem("token", token);
+      
+
+      if (userResponse.data.tipoUsuario === 'receptor') {
+        navigate("/inicioReceptor");
+      } else if (userResponse.data.tipoUsuario === 'doador') {
+        navigate("/cadastroPostagem");
+      }
       alert("Login realizado com sucesso!");
-      localStorage.setItem("token", response.data);
     } catch (error) {
       alert(`Erro ao fazer login: ${error.response?.data?.message || "Erro desconhecido"}`);
     }
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen px-6 py-12 bg-orange-50 text-yellow-800">
+    <div className="flex flex-col items-center min-h-screen px-6 py-12 bg-background text-secondary">
       <Logo size="large" />
 
       <div className="mt-10 text-3xl font-bold text-primary text-center">
