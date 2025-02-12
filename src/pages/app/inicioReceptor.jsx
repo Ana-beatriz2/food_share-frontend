@@ -25,8 +25,8 @@ export default function InicioReceptor() {
 
     return (
         <div className="flex overflow-auto flex-col pb-20 bg-orange-50">
-            <div className="px-5 py-0 mx-auto my-0 w-full max-w-[1200px]">
-                <h1 className="mx-0 mt-10 mb-12 text-4xl font-bold text-center text-primary">
+            <div className="px-4 sm:px-6 py-0 mx-auto my-0 w-full max-w-full sm:max-w-[1200px]">
+                <h1 className="mx-0 mt-10 mb-12 text-3xl sm:text-4xl font-bold text-center text-primary">
                     Doações Disponíveis
                 </h1>
 
@@ -42,19 +42,19 @@ export default function InicioReceptor() {
                             produtos.map((produto) => (
                                 <div
                                     key={produto.id}
-                                    className="flex gap-5 p-5 mb-9 border border-zinc-300 shadow-md max-md:flex-col max-md:items-center"
+                                    className="flex gap-5 p-5 mb-9 border border-zinc-300 shadow-md flex-col sm:flex-row sm:items-center"
                                 >
                                     <img
                                         src={produto.imagem != null ? `http://localhost:3000/uploads/${produto.imagem}` : defaultImage} 
                                         alt={produto.name}
-                                        className="object-contain h-[156px] w-[143px]"
+                                        className="object-contain h-[156px] w-[143px] mb-4 sm:mb-0 sm:mr-5"
                                     />
-                                    <div className="flex-1 text-xl font-bold text-secondary">
+                                    <div className="flex-1 text-lg sm:text-xl font-bold text-secondary">
                                         <p>Nome: {produto.Produto.nome}</p>
                                         <p>Quantidade: {produto.quantidade}</p>
                                         <p>Validade: {transformDate(produto.validade)}</p>
                                         <p>Local de Retirada: {`${produto.PostoColetum.nome}, ${produto.PostoColetum.cidade} - ${produto.PostoColetum.estado}`}</p>
-                                        <button className="px-8 py-2.5 ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
+                                        <button className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
                                             Ver Detalhes
                                         </button>
                                     </div>
