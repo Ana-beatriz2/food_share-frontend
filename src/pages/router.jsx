@@ -9,6 +9,7 @@ import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 import ReservasReceptor from "./app/reservasReceptor";
+import DoacoesDoador from "./app/doacoesDoador";
 import { UserProvider } from "@/context/AuthContext"; 
 
 export default function Router() {
@@ -27,6 +28,9 @@ export default function Router() {
             </Route>
             <Route path="/cadastroPostoDeColeta" element={<DefaultHeaderDoador />}>
                 <Route index element={<CadastroPostoDeColeta />} />
+            </Route>
+            <Route path="/doacoesDoador" element={<DefaultHeaderDoador />}>
+                <Route index element={<DoacoesDoador />} />
             </Route>
 
             {/* Receptor */}

@@ -4,7 +4,7 @@ import defaultImage from "../../assets/postagemDefaultImage.png";
 import api from "@/services/api";
 
 export default function ReservasReceptor() {
-    const [reservas, setProdutos] = useState([]); 
+    const [reservas, setReservas] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -13,7 +13,7 @@ export default function ReservasReceptor() {
             try {
                 const response = await api.get("/reserva/receptor"); 
                 console.log(response);
-                setProdutos(response.data);
+                setReservas(response.data);
             } catch (err) {
                 setError("Erro ao carregar produtos.");
             } finally {
