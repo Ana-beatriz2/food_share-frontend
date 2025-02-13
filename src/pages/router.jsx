@@ -8,6 +8,7 @@ import DefaultHeaderReceptor from "./layouts/app/deafultHeaderReceptor";
 import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
+import ReservasReceptor from "./app/reservasReceptor";
 import { UserProvider } from "@/context/AuthContext"; 
 
 export default function Router() {
@@ -19,14 +20,21 @@ export default function Router() {
                 <Route path="cadastro" element={<UserRegister />} />
                 <Route path="login" element={<Login />} />
             </Route>
+
+            {/* Doador */}
             <Route path="/cadastroPostagem" element={<DefaultHeaderDoador />}>
                 <Route index element={<CadastroPostagem />} />
             </Route>
+            <Route path="/cadastroPostoDeColeta" element={<DefaultHeaderDoador />}>
+                <Route index element={<CadastroPostoDeColeta />} />
+            </Route>
+
+            {/* Receptor */}
             <Route path="/inicioReceptor" element={<DefaultHeaderReceptor />}>
                 <Route index element={<InicioReceptor />} />
             </Route>
-            <Route path="/cadastroPostoDeColeta" element={<DefaultHeaderDoador />}>
-                <Route index element={<CadastroPostoDeColeta />} />
+            <Route path="/reservasReceptor" element={<DefaultHeaderReceptor />}>
+                <Route index element={<ReservasReceptor />} />
             </Route>
         </Routes>
         </UserProvider>

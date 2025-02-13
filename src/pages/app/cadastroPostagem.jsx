@@ -115,7 +115,7 @@ export function CadastroPostagem() {
                             />
                             <button
                                 type="button"
-                                className="px-4 py-2 w-full text-left text-sm text-secondary border ml-2 border-white rounded-lg shadow-md hover:bg-opacity-80 transition-all"
+                                className="px-4 py-3 w-full text-left text-sm text-secondary border ml-2 shadow-md hover:bg-opacity-80 transition-all bg-background"
                                 onClick={() => document.getElementById("foto")?.click()}
                             >
                                 Carregar a foto da doação
