@@ -35,7 +35,7 @@ export default function DetalhesPostagem() {
             alert("Preencha todos os campos!");
             return;
         }
-        // detalhesPostagemReceptor/cb80bfd5-7e5d-411a-94af-3d686b523c97
+
         try {
             const response = await api.post(`/reserva`, {
                 postoColetaId: postagem.postoColetaId,
@@ -84,7 +84,6 @@ export default function DetalhesPostagem() {
                 </div>       
             </div>
 
-            {/* MODAL */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-background p-6 rounded-lg shadow-lg w-[90%] max-w-md">

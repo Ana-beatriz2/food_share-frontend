@@ -11,6 +11,7 @@ import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 import ReservasReceptor from "./app/reservasReceptor";
 import DoacoesDoador from "./app/doacoesDoador";
 import DetalhesPostagemReceptor from "./app/detalhesPostagemReceptor";
+import DetalhesReserva from "./app/detalhesReserva";
 import { UserProvider } from "@/context/AuthContext"; 
 
 export default function Router() {
@@ -43,6 +44,9 @@ export default function Router() {
             </Route>
             <Route path="/detalhesPostagemReceptor/:id" element={<DefaultHeaderReceptor />}>
                 <Route index element={<DetalhesPostagemReceptor />} />
+            </Route>
+            <Route path="/detalhesReserva/:id" element={<DefaultHeaderReceptor />}>
+                <Route index element={<DetalhesReserva />} />
             </Route>
         </Routes>
         </UserProvider>

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import transformDate from '../../utils/transformDate';
 import defaultImage from "../../assets/postagemDefaultImage.png";
+import { useNavigate } from 'react-router-dom';
 import api from "@/services/api";
 
 export default function ReservasReceptor() {
     const [reservas, setReservas] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProdutos = async () => {
@@ -15,6 +17,7 @@ export default function ReservasReceptor() {
                 console.log(response);
                 setReservas(response.data);
             } catch (err) {
+                console.log(err)
                 setError("Erro ao carregar produtos.");
             } finally {
                 setLoading(false);
@@ -57,7 +60,7 @@ export default function ReservasReceptor() {
                                     className="flex gap-5 p-5 mb-9 border border-zinc-300 shadow-md flex-col sm:flex-row sm:items-center"
                                 >
                                     <img
-                                        src={reserva.postagem.imagem != null ? `http://localhost:3000/uploads/${reserva.imagem}` : defaultImage} 
+                                        src={reserva.postagem.imagem != null ? `http://localhost:3000/uploads/${reserva.postagem.imagem}` : defaultImage} 
                                         alt={reserva.ReservaProdutos.Produto.nome}
                                         className="object-contain h-[156px] w-[143px] mb-4 sm:mb-0 sm:mr-5"
                                     />
@@ -66,7 +69,7 @@ export default function ReservasReceptor() {
                                         <p>Quantidade: {reserva.ReservaProdutos.quantidade}</p>
                                         <p>Data Retirada: {reserva.dataRetirada != null ? transformDate(reserva.dataRetirada) : ''}</p>
                                         <p>Local de Retirada: {`${reserva.PostoColetum.nome}, ${reserva.PostoColetum.cidade} - ${reserva.PostoColetum.estado}`}</p>
-                                        <button className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
+                                        <button onClick={() => navigate(`/detalhesReserva/${reserva.id}`)} className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
                                             Ver Detalhes
                                         </button>
                                         <button onClick={() => handleDelete(reserva.id)} className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-red-500 font-bold bg-third shadow-md">
