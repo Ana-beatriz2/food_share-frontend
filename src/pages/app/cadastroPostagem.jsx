@@ -32,21 +32,35 @@ export function CadastroPostagem() {
 
     const onSubmit = async (data) => {
         try {
-            console.log('data: ', data);
-            const transformedData = {
-                ...data,
-                nomeProduto: Number(data.nomeProduto), 
-                postoColeta: Number(data.postoColeta), 
-            };
+            const transformedData = { ...data };
+
+            Object.keys(transformedData).forEach((key) => {
+                if (transformedData[key] === "") {
+                    transformedData[key] = null;
+                }
+            });
 
             const formData = new FormData();
-            formData.append("produto", JSON.stringify(transformedData));
-            formData.append("foto", data.foto[0]);
+            
+            formData.append("produtoId", transformedData.produtoId);
+            formData.append("postoColetaId", transformedData.postoColetaId);
+            formData.append("quantidade", transformedData.quantidade);
+            formData.append("validade", transformedData.validade);
+            formData.append("observacao", transformedData.observacao);
+            
+            if (data.file && data.file[0]) {
+                formData.append("file", data.file[0]);
+            }
 
-            await api.post(`/postoColeta`, formData);
+            await api.post("/postagem", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
 
             alert("Cadastro realizado com sucesso");
         } catch (error) {
+            console.log("error: ", error);
             alert(`Erro ao cadastrar: ${error.response.data.message}`);
         }
     };
@@ -60,12 +74,12 @@ export function CadastroPostagem() {
                     
 
                     <div className="flex flex-col gap-3.5">
-                        <label htmlFor="nomeProduto" className="text-xl font-bold text-secondary">
+                        <label htmlFor="produtoId" className="text-xl font-bold text-secondary">
                             *Nome Produto:
                         </label>
                         <select
-                            id="nomeProduto"
-                            {...register("nomeProduto")}
+                            id="produtoId"
+                            {...register("produtoId")}
                             className="px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-violet-200 bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5"
                         >
                             <option value="">Selecione o Produto</option>
@@ -79,12 +93,12 @@ export function CadastroPostagem() {
 
 
                     <div className="flex flex-col gap-3.5">
-                        <label htmlFor="postoColeta" className="text-xl font-bold text-secondary">
+                        <label htmlFor="postoColetaId" className="text-xl font-bold text-secondary">
                             *Posto de Coleta:
                         </label>
                         <select
-                            id="postoColeta"
-                            {...register("postoColeta")}
+                            id="postoColetaId"
+                            {...register("postoColetaId")}
                             className="px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-violet-200 bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5"
                         >
                             <option value="">Selecione o Posto de Coleta</option>
@@ -97,26 +111,26 @@ export function CadastroPostagem() {
                     </div>
 
                     <InputField label="*Quantidade:" placeholder="Digite a Quantidade do Produto" register={register("quantidade")} />
-                    <InputField label="*Validade:" placeholder="Validade do Produto" register={register("validade")} />
+                    <InputField label="*Validade:" placeholder="Validade do Produto" type="date" register={register("validade") } />
 
 
                     <div className="flex flex-col gap-3.5">
-                        <label htmlFor="foto" className="text-xl font-bold text-secondary">
+                        <label htmlFor="file" className="text-xl font-bold text-secondary">
                             Foto do Alimento:
                         </label>
 
                         <div className="relative w-[453px]">
                             <input
-                                id="foto"
+                                id="file"
                                 type="file"
                                 accept="image/*"
-                                {...register("foto")}
+                                {...register("file")}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             />
                             <button
                                 type="button"
                                 className="px-4 py-3 w-full text-left text-sm text-secondary border ml-2 shadow-md hover:bg-opacity-80 transition-all bg-background"
-                                onClick={() => document.getElementById("foto")?.click()}
+                                onClick={() => document.getElementById("file")?.click()}
                             >
                                 Carregar a foto da doação
                             </button>
@@ -138,7 +152,7 @@ export function CadastroPostagem() {
 }
 
 
-const InputField = ({ label, placeholder, className, register }) => {
+const InputField = ({ label, placeholder, className, register, type = "text" }) => {
     const id = React.useId();
 
     return (
@@ -148,7 +162,7 @@ const InputField = ({ label, placeholder, className, register }) => {
             </label>
             <input
                 id={id}
-                type="text"
+                type={type}
                 placeholder={placeholder}
                 {...register}
                 className={`px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-background bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5 ${className} placeholder-[#955306]`}
