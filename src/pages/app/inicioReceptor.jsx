@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import transformDate from '../../utils/transformDate';
 import defaultImage from "../../assets/postagemDefaultImage.png";
+import { useNavigate } from 'react-router-dom';
 import api from "@/services/api";
 
 export default function InicioReceptor() {
     const [produtos, setProdutos] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProdutos = async () => {
@@ -54,7 +56,7 @@ export default function InicioReceptor() {
                                         <p>Quantidade: {produto.quantidade}</p>
                                         <p>Validade: {transformDate(produto.validade)}</p>
                                         <p>Local de Retirada: {`${produto.PostoColetum.nome}, ${produto.PostoColetum.cidade} - ${produto.PostoColetum.estado}`}</p>
-                                        <button className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
+                                        <button onClick={() => navigate(`/detalhesPostagemReceptor/${produto.id}`)} className="px-8 py-2.5 ml-0 sm:ml-12 mt-6 text-sm text-primary font-bold bg-third shadow-md">
                                             Ver Detalhes
                                         </button>
                                     </div>

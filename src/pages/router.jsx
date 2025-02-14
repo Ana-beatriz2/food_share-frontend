@@ -10,6 +10,7 @@ import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 import ReservasReceptor from "./app/reservasReceptor";
 import DoacoesDoador from "./app/doacoesDoador";
+import DetalhesPostagemReceptor from "./app/detalhesPostagemReceptor";
 import { UserProvider } from "@/context/AuthContext"; 
 
 export default function Router() {
@@ -39,6 +40,9 @@ export default function Router() {
             </Route>
             <Route path="/reservasReceptor" element={<DefaultHeaderReceptor />}>
                 <Route index element={<ReservasReceptor />} />
+            </Route>
+            <Route path="/detalhesPostagemReceptor/:id" element={<DefaultHeaderReceptor />}>
+                <Route index element={<DetalhesPostagemReceptor />} />
             </Route>
         </Routes>
         </UserProvider>
