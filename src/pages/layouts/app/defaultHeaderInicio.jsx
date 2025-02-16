@@ -13,7 +13,7 @@ export default function HeaderInicio() {
   return (
     <div>
       <header className="flex justify-between items-center px-20 py-5 w-full bg-primary">
-        <img src={logo} alt="Logo" className="mb-2" />
+        <img src={logo} alt="Logo" className="mb-2 hidden md:block" />
         <button className="bg-primary" onClick={toggleMenu}>
           <img
             src="src/assets/menu-aberto.png"
