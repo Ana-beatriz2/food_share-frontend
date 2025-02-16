@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Inicio from "./app/inicio";
 import InicioReceptor from "./app/inicioReceptor";
 import Login from "./auth/login";
@@ -10,8 +10,9 @@ import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 import InicioPostoDeColeta from "./app/inicioPostoDeColeta";
 import VisualizarUsuario from "./app/visualizarUsuario";
+import EditarUsuario from "./app/EditarUsuario";
 
-export default function Router() {
+export default function AppRoutes() {
     return (
         <Routes> 
             <Route path="/" element={<DefaultHeaderInicio/>}>
@@ -34,6 +35,7 @@ export default function Router() {
             <Route path="/visualizarUsuario" element={<DefaultHeaderDoador />}>
                 <Route index element={<VisualizarUsuario />} />
             </Route>
+            <Route path="/editar/:usuarioID" element={<EditarUsuario />} />
         </Routes>
-    )
+    );
 }
