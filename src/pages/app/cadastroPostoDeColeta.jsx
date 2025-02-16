@@ -17,42 +17,44 @@ export function CadastroPostoDeColeta() {
     };
 
     return (
-        <div className="flex flex-col items-center pb-12 min-h-screen bg-white">
-            <Logo />
-            <div className="mt-8 text-5xl font-bold" style={{ color: "#99A146" }}>
-                Cadastro Posto de Coleta
-            </div>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 mt-10">
-                <InputField label="Nome do Posto de Coleta" placeholder="Digite o nome" register={register("nomePosto", { required: true })} />
-                
-                <div className="flex flex-col gap-3.5">
-                    <label className="text-xl font-bold text-yellow-800">Tipo de posto</label>
-                    <select {...register("tipoPosto", { required: "Selecione um tipo de posto" })} className="px-4 py-2 border border-gray-300 w-[453px] bg-white text-black">
-                        <option value="">Selecione um tipo</option>
-                        <option value="ONG">ONG</option>
-                        <option value="Supermercado">Supermercado</option>
-                        <option value="Restaurante">Restaurante</option>
-                    </select>
+        <div className="flex overflow-hidden flex-col items-center pb-2210 min-h-screen bg-background">
+            <div className="flex flex-col items-center px-5 py-0 w-full max-w-[453px]">
+                <Logo />
+                <div className="mt-8 text-5xl font-bold" style={{ color: "#99A146" }}>
+                    Cadastro Posto de Coleta
                 </div>
 
-                <InputField label="Estado" placeholder="Digite o Estado" register={register("estado", { required: true })} />
-                <InputField label="Cidade" placeholder="Digite a cidade" register={register("cidade", { required: true })} />
-                <InputField label="Bairro" placeholder="Digite o bairro" register={register("bairro", { required: true })} />
-                <InputField label="Complemento" placeholder="Opcional" register={register("complemento")} />
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 mt-10">
+                    <InputField label="Nome do Posto de Coleta" placeholder="Digite o nome" register={register("nomePosto", { required: true })} />
+                    
+                    <div className="flex flex-col gap-3.5">
+                        <label className="text-xl font-bold text-yellow-800">Tipo de posto</label>
+                        <select {...register("tipoPosto", { required: "Selecione um tipo de posto" })} className="px-4 py-2 border border-gray-300 w-[453px] bg-white text-black">
+                            <option value="">Selecione um tipo</option>
+                            <option value="ONG">ONG</option>
+                            <option value="Supermercado">Supermercado</option>
+                            <option value="Restaurante">Restaurante</option>
+                        </select>
+                    </div>
 
-                {/* Botão para abrir o modal */}
-                <button type="button" onClick={() => setIsModalOpen(true)} className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-md">
-                    Funcionamento do Estabelecimento
-                </button>
+                    <InputField label="Estado" placeholder="Digite o Estado" register={register("estado", { required: true })} />
+                    <InputField label="Cidade" placeholder="Digite a cidade" register={register("cidade", { required: true })} />
+                    <InputField label="Bairro" placeholder="Digite o bairro" register={register("bairro", { required: true })} />
+                    <InputField label="Complemento" placeholder="Opcional" register={register("complemento")} />
 
-                <button type="submit" className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-md">
-                    CONTINUAR
-                </button>
-            </form>
+                    {/* Botão para abrir o modal */}
+                    <button type="button" onClick={() => setIsModalOpen(true)} className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-md">
+                        Funcionamento do Estabelecimento
+                    </button>
 
-            {/* Modal de Funcionamento */}
-            {isModalOpen && <FuncionamentoModal closeModal={() => setIsModalOpen(false)} setValue={setValue} />}
+                    <button type="submit" className="px-0 py-3.5 mt-8 w-full text-2xl font-bold text-center text-yellow-800 bg-third cursor-pointer border-[none] shadow-md">
+                        CONTINUAR
+                    </button>
+                </form>
+
+                {/* Modal de Funcionamento */}
+                {isModalOpen && <FuncionamentoModal closeModal={() => setIsModalOpen(false)} setValue={setValue} />}
+            </div>
         </div>
     );
 }

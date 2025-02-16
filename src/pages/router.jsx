@@ -9,6 +9,7 @@ import { UserRegister } from "./app/cadastro";
 import { CadastroPostagem } from "./app/cadastroPostagem";
 import { CadastroPostoDeColeta } from "./app/cadastroPostoDeColeta";
 import InicioPostoDeColeta from "./app/inicioPostoDeColeta";
+import VisualizarUsuario from "./app/visualizarUsuario";
 
 export default function Router() {
     return (
@@ -29,6 +30,9 @@ export default function Router() {
             </Route>
             <Route path="/inicioPostoDeColeta" element={<DefaultHeaderDoador />}>
                 <Route index element={<InicioPostoDeColeta />} />
+            </Route>
+            <Route path="/visualizarUsuario" element={<DefaultHeaderDoador />}>
+                <Route index element={<VisualizarUsuario />} />
             </Route>
         </Routes>
     )
