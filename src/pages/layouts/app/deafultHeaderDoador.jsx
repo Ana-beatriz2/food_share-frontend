@@ -18,7 +18,7 @@ export default function DefaultHeaderDoador() {
                         <button onClick={() => navigate('/cadastroPostagem')} className="bg-primary text-third px-4 py-2 rounded-lg font-bold">
                             Cadastrar Postagem
                         </button>
-                        <button onClick={() => navigate('/cadastroPostoDeColeta')} className="bg-primary text-third px-4 py-2 rounded-lg font-bold">
+                        <button onClick={() => navigate('/inicioPostoDeColeta')} className="bg-primary text-third px-4 py-2 rounded-lg font-bold">
                             Posto de Coleta
                         </button>
                     </div>

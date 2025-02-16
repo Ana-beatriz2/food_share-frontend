@@ -35,6 +35,9 @@ export default function Router() {
             <Route path="/doacoesDoador" element={<DefaultHeaderDoador />}>
                 <Route index element={<DoacoesDoador />} />
             </Route>
+            <Route path="/inicioPostoDeColeta" element={<DefaultHeaderDoador />}>
+                <Route index element={<InicioPostoDeColeta />} />
+            </Route>
 
             {/* Receptor */}
             <Route path="/inicioReceptor" element={<DefaultHeaderReceptor />}>
@@ -48,9 +51,6 @@ export default function Router() {
             </Route>
             <Route path="/detalhesReserva/:id" element={<DefaultHeaderReceptor />}>
                 <Route index element={<DetalhesReserva />} />
-            </Route>
-            <Route path="/inicioPostoDeColeta" element={<DefaultHeaderDoador />}>
-                <Route index element={<InicioPostoDeColeta />} />
             </Route>
         </Routes>
         </UserProvider>

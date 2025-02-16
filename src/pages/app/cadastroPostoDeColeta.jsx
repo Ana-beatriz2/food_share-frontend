@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import api from "@/services/api";
+import { useNavigate } from 'react-router-dom';
 
 export function CadastroPostoDeColeta() {
     const { register, handleSubmit } = useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [funcionamentos, setFuncionamentos] = useState([]);
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -25,6 +27,8 @@ export function CadastroPostoDeColeta() {
                 })
             );
 
+            
+            navigate("/inicioPostoDeColeta");
             alert("Cadastro realizado com sucesso!");
         } catch (error) {
             alert(`Erro ao cadastrar: ${error.response?.data?.message || error.message}`);
