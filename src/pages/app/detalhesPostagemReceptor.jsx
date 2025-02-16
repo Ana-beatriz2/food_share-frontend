@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import transformDate from "../../utils/transformDate";
 import defaultImage from "../../assets/postagemDefaultImage.png";
+import { formataDiasFuncionamento, formataHorariosFuncionamento } from '../../utils/filterFuncionamento';
 import api from "@/services/api";
 
 export default function DetalhesPostagem() {
@@ -70,6 +71,10 @@ export default function DetalhesPostagem() {
                         <p>Quantidade: {postagem.quantidade}</p>
                         <p>Validade: {transformDate(postagem.validade)}</p>
                         <p>Local de Retirada: {`${postagem.PostoColetum.nome}, ${postagem.PostoColetum.cidade} - ${postagem.PostoColetum.estado}`}</p>
+                        <p>Ponto de Referência: {postagem.PostoColetum.ponto_referencia}</p>
+                        <p>Complemento: {postagem.PostoColetum.ponto_referencia}</p>
+                        <p>Dias disponíveis para retirada: {formataDiasFuncionamento(postagem.PostoColetum.Funcionamentos)}</p>
+                        <p>Horários disponíveis para retirada, respectivamente: {formataHorariosFuncionamento(postagem.PostoColetum.Funcionamentos)}</p>
                         <p>Contato Doador: {postagem.Usuario.telefone}</p>
 
                         <div className="flex gap-4 mt-20">
