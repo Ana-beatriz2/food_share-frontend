@@ -34,7 +34,7 @@ export default function DoacoesDoador() {
 
                 <button 
                     onClick={() => navigate('/cadastroPostagem')} 
-                    className="absolute right-4 sm:right-0 top-4 sm:top-0 px-6 sm:px-10 py-2 my-10 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                    className="hidden sm:block absolute right-4 sm:right-0 top-4 sm:top-0 px-6 sm:px-10 py-2 my-10 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 >
                     Cadastrar Doação
                 </button>
@@ -64,7 +64,7 @@ export default function DoacoesDoador() {
                                         <p>Validade: {transformDate(produto.validade)}</p>
                                         <p>Local de Retirada: {`${produto.PostoColetum.nome}, ${produto.PostoColetum.cidade} - ${produto.PostoColetum.estado}`}</p>
                                         <button 
-                                            className="px-8 py-2.5 mt-6 text-sm text-primary font-bold bg-third shadow-md w-full sm:w-auto"
+                                             onClick={() => navigate(`/detalhesPostagemDoador/${produto.id}`)}  className="px-8 py-2.5 mt-6 text-sm text-primary font-bold bg-third shadow-md w-full sm:w-auto"
                                         >
                                             Ver Detalhes
                                         </button>

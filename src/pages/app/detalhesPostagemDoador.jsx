@@ -5,7 +5,7 @@ import defaultImage from "../../assets/postagemDefaultImage.png";
 import { formataDiasFuncionamento, formataHorariosFuncionamento } from '../../utils/filterFuncionamento';
 import api from "@/services/api";
 
-export default function DetalhesPostagemReceptor() {
+export default function DetalhesPostagemDoador() {
     const { id } = useParams();
     const navigate = useNavigate();
     
@@ -52,6 +52,16 @@ export default function DetalhesPostagemReceptor() {
         }
     };
 
+    const handleDelete = async (postagemId) => {
+        try {
+            await api.delete(`/postagem/${postagemId}`);
+            alert('Postagem deletada com sucesso!');
+            navigate('/doacoesDoador');
+        } catch (error){
+            alert(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
+        }
+    };
+
     if (loading) return <p className="text-center text-gray-500">Carregando detalhes...</p>;
     if (error) return <p className="text-center text-red-500">{error}</p>;
     if (!postagem) return <p className="text-center text-gray-500">Postagem não encontrada.</p>;
@@ -78,11 +88,18 @@ export default function DetalhesPostagemReceptor() {
                         <p>Contato Doador: {postagem.Usuario.telefone}</p>
 
                         <div className="flex gap-4 mt-20">
-                            <button onClick={() => navigate('/inicioReceptor')} className="px-8 py-2.5 text-sm text-red-500 font-bold bg-third shadow-md">
+                            <button onClick={() => navigate('/doacoesDoador')} className="px-8 py-2.5 text-sm text-secondary font-bold bg-third shadow-md">
                                 Voltar
                             </button>
-                            <button onClick={() => setIsModalOpen(true)} className="px-8 py-2.5 text-sm text-primary font-bold bg-third shadow-md">
-                                RESERVAR
+                            <button onClick={() => navigate(`/edicaoPostagem/${postagem.id}`)} className="p-3 bg-background rounded-md ">
+                                <img
+                                    src="src/assets/edit.png"
+                                    alt="Edit icon"
+                                    className="w-15 h-8 bg-background"
+                                />
+                            </button>
+                            <button onClick={() => handleDelete(postagem.id)} className="px-8 py-2.5 text-sm text-red-500 font-bold bg-third shadow-md">
+                                EXCLUIR POSTAGEM
                             </button>
                         </div>
                     </div>
