@@ -35,7 +35,6 @@ export default function AppRoutes() {
             <Route path="/visualizarUsuario" element={<DefaultHeaderDoador />}>
                 <Route index element={<VisualizarUsuario />} />
             </Route>
-            <Route path="/editar/:usuarioID" element={<EditarUsuario />} />
         </Routes>
     );
 }
