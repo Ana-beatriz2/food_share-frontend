@@ -90,7 +90,7 @@ const InputField = ({ label, placeholder, register, type = "text" }) => {
     return (
         <div className="flex flex-col gap-2 w-full">
             <label className="text-xl font-bold text-secondary">{label}</label>
-            <input type={type} placeholder={placeholder} {...register} className="px-4 py-2 w-full text-base border border-white bg-background shadow-md" />
+            <input type={type} placeholder={placeholder} {...register} className="px-4 py-2 w-full text-base border border-white bg-background shadow-md placeholder-secondary" />
         </div>
     );
 };
@@ -113,7 +113,24 @@ const InputFile = ({ label, register }) => {
     return (
         <div className="flex flex-col gap-2 w-full">
             <label className="text-xl font-bold text-secondary">{label}</label>
-            <input type="file" accept="image/*" {...register} className="w-full text-sm border border-white bg-background shadow-md cursor-pointer" />
+
+            <input
+                type="file"
+                accept="image/*"
+                {...register}
+                id="file"
+                className="hidden"
+                onChange={(e) => {
+                    const fileLabel = document.getElementById("file-label");
+                    fileLabel.textContent = e.target.files[0]?.name || "Nenhum arquivo selecionado";
+                }}
+            />
+
+            <label htmlFor="file" className="px-4 py-2 border border-white bg-background shadow-md text-secondary cursor-pointer">
+                Selecionar arquivo
+            </label>
+
+            <span id="file-label" className="text-sm text-secondary">Nenhum arquivo selecionado</span>
         </div>
     );
 };
