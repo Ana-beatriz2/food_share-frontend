@@ -36,8 +36,7 @@ export default function Inicio() {
         <div className="flex flex-col self-end mt-24 max-w-full text-right w-[937px] max-md:mt-10">
           <img
             loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/2ccd772ec835f76d8f3b1992f3dd0e44f1e5148e9cf9cbb16f7d854a2955077d?placeholderIfAbsent=true&apiKey=dc407002bada4564be2dd09718dd06c0"
-            alt="Food Share illustration"
+            src="src\assets\background-pessoas.png"
             className="object-contain mt-60 max-w-full aspect-[1.74] w-[697px] max-md:mt-10"
           />
         </div>
