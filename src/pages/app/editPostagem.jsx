@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom"; 
 import api from "@/services/api";
+import { toast } from 'react-toastify';
 
 export function EdicaoPostagem() {
     const { register, handleSubmit, setValue } = useForm();
@@ -37,7 +38,7 @@ export function EdicaoPostagem() {
                     setValue("observacao", postagem.observacao || "");
                 }
             } catch (error) {
-                alert(`Erro ao buscar dados: ${error.response?.data?.message || error.message}`);
+                toast.error(`Erro ao buscar dados: ${error.response?.data?.message || error.message}`);
             }
         };
     
@@ -48,10 +49,10 @@ export function EdicaoPostagem() {
         try {
             await api.put(`/postagem/${id}`, data);
 
-            alert("Postagem atualizada com sucesso!");
+            toast.success("Postagem atualizada com sucesso!");
             navigate(`/detalhesPostagemDoador/${id}`)
         } catch (error) {
-            alert(`Erro ao atualizar: ${error.response?.data?.message || error.message}`);
+            toast.error(`Erro ao atualizar: ${error.response?.data?.message || error.message}`);
         }
     };
 

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { formataDiasFuncionamento, formataHorariosFuncionamento } from '../../utils/filterFuncionamento';
 import transformDate from "../../utils/transformDate";
 import defaultImage from "../../assets/postagemDefaultImage.png";
+import { toast } from 'react-toastify';
 import api from "@/services/api";
 
 export default function DetalhesReserva() {
@@ -32,10 +33,10 @@ export default function DetalhesReserva() {
      const handleDelete = async (reservaId) => {
         try {
             await api.delete(`/reserva/${reservaId}`);
-            alert('Reserva deletada com sucesso!');
+            toast.success('Reserva deletada com sucesso!');
             navigate('/reservasReceptor')
         } catch (error){
-            alert(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
+            toast.error(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
         }
      }
 

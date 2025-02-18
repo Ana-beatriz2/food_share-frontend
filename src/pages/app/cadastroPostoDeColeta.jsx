@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import api from "@/services/api";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export function CadastroPostoDeColeta() {
     const { register, handleSubmit } = useForm();
@@ -29,9 +30,9 @@ export function CadastroPostoDeColeta() {
 
             
             navigate("/inicioPostoDeColeta");
-            alert("Cadastro realizado com sucesso!");
+            toast.success("Cadastro realizado com sucesso!");
         } catch (error) {
-            alert(`Erro ao cadastrar: ${error.response?.data?.message || error.message}`);
+            toast.error(`Erro ao cadastrar: ${error.response?.data?.message || error.message}`);
         }
     };
 

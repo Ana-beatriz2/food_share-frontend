@@ -3,6 +3,7 @@ import axios from "axios";
 import Logo from "@/components/ui/logo";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
@@ -20,18 +21,17 @@ export default function LoginPage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       
-      console.log(userResponse);
       localStorage.setItem("token", token);
-      
 
       if (userResponse.data.tipoUsuario === 'receptor') {
         navigate("/inicioReceptor");
       } else if (userResponse.data.tipoUsuario === 'doador') {
         navigate("/cadastroPostagem");
       }
-      alert("Login realizado com sucesso!");
+
+      toast.success("Login realizado com sucesso!");
     } catch (error) {
-      alert(`Erro ao fazer login: ${error.response?.data?.message || "Erro desconhecido"}`);
+      toast.error(`Erro ao fazer login: ${error.response?.data?.message || "Erro desconhecido"}`);
     }
   };
 

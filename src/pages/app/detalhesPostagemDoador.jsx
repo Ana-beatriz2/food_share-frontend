@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import transformDate from "../../utils/transformDate";
 import defaultImage from "../../assets/postagemDefaultImage.png";
 import { formataDiasFuncionamento, formataHorariosFuncionamento } from '../../utils/filterFuncionamento';
+import { toast } from 'react-toastify';
 import api from "@/services/api";
 
 export default function DetalhesPostagemDoador() {
@@ -33,7 +34,7 @@ export default function DetalhesPostagemDoador() {
 
     const handleConfirmarReserva = async () => {
         if (!dataRetirada || !quantidadeReserva) {
-            alert("Preencha todos os campos!");
+            toast.error("Preencha todos os campos!");
             return;
         }
 
@@ -45,20 +46,20 @@ export default function DetalhesPostagemDoador() {
                 quantidade: quantidadeReserva
             });
             console.log(response);
-            alert("Reserva realizada com sucesso!");
+            toast.success("Reserva realizada com sucesso!");
             setIsModalOpen(false);
         } catch (error) {
-            alert(`Erro ao reservar: ${error.response?.data?.message || "Erro desconhecido"}`);
+            toast.error(`Erro ao reservar: ${error.response?.data?.message || "Erro desconhecido"}`);
         }
     };
 
     const handleDelete = async (postagemId) => {
         try {
             await api.delete(`/postagem/${postagemId}`);
-            alert('Postagem deletada com sucesso!');
+            toast.success('Postagem deletada com sucesso!');
             navigate('/doacoesDoador');
         } catch (error){
-            alert(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
+            toast.error(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
         }
     };
 

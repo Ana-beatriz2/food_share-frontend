@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";import axios from "axios";
 import Logo from "@/components/ui/logo";
+import { toast } from 'react-toastify';
 
 export function UserRegister() {
   const { register, handleSubmit } = useForm();
@@ -16,9 +17,9 @@ export function UserRegister() {
       });
 
       await axios.post(`${baseUrl}/usuario`, transformedData);
-      alert("Cadastro realizado com sucesso")
+      toast.success("Cadastro realizado com sucesso")
     } catch (error) {
-      alert(`Erro ao cadastrar: ${error.response.data.message}`);
+      toast.error(`Erro ao cadastrar: ${error.response.data.message}`);
     }
   };
 

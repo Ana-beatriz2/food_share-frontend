@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { formataDiasFuncionamento, formataHorariosFuncionamento } from '../../utils/filterFuncionamento';
 import api from "@/services/api";
+import { toast } from 'react-toastify';
 
 export default function InicioPostoDeColeta() {
     const [postoColeta, setPostoColeta] = useState([]); 
@@ -27,10 +28,10 @@ export default function InicioPostoDeColeta() {
     const handleDelete = async (postoColetaId) => {
         try {
             await api.delete(`/postoColeta/${postoColetaId}`);
-            alert('Posto de coleta deletado com sucesso!');
+            toast.success('Posto de coleta deletado com sucesso!');
             window.location.reload();
         } catch (error) {
-            alert(`Houve um erro ao excluir o posto de coleta: ${error.response.data.message}`);
+            toast.error(`Houve um erro ao excluir o posto de coleta: ${error.response.data.message}`);
         }
     };
 

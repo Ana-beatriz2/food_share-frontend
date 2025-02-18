@@ -3,6 +3,7 @@ import transformDate from '../../utils/transformDate';
 import defaultImage from "../../assets/postagemDefaultImage.png";
 import { useNavigate } from 'react-router-dom';
 import api from "@/services/api";
+import { toast } from 'react-toastify';
 
 export default function ReservasReceptor() {
     const [reservas, setReservas] = useState([]); 
@@ -31,10 +32,10 @@ export default function ReservasReceptor() {
      const handleDelete = async (reservaId) => {
         try {
             await api.delete(`/reserva/${reservaId}`);
-            alert('Reserva deletada com sucesso!');
+            toast.success('Reserva deletada com sucesso!');
             window.location.reload();
         } catch (error){
-            alert(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
+            toast.error(`Houve um erro ao excluir a postagem: ${error.response.data.message}`);
         }
     }
 

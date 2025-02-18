@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import api from "@/services/api";
 
 export function CadastroPostagem() {
@@ -13,7 +14,7 @@ export function CadastroPostagem() {
                 const response = await api.get(`/produto`);
                 setProdutos(response.data);
             } catch (error) {
-                alert(`Erro ao buscar produtos: ${error.response.data.message}`);
+                toast.error(`Erro ao buscar produtos: ${error.response.data.message}`);
             }
         };
 
@@ -22,7 +23,7 @@ export function CadastroPostagem() {
                 const response = await api.get(`/postoColeta/doador`);
                 setPostosColeta(response.data);
             } catch (error) {
-                alert(`Erro ao buscar postos de coleta: ${error.response.data.message}`);
+                toast.error(`Erro ao buscar postos de coleta: ${error.response.data.message}`);
             }
         };
 
@@ -58,10 +59,10 @@ export function CadastroPostagem() {
                 },
             });
 
-            alert("Cadastro realizado com sucesso");
+            toast.success("Cadastro realizado com sucesso");
         } catch (error) {
             console.log("error: ", error);
-            alert(`Erro ao cadastrar: ${error.response.data.message}`);
+            toast.error(`Erro ao cadastrar: ${error.response.data.message}`);
         }
     };
 
