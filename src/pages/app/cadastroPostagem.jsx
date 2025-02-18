@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import api from "@/services/api";
 
 export function CadastroPostagem() {
@@ -42,15 +42,14 @@ export function CadastroPostagem() {
             });
 
             const formData = new FormData();
-            
             formData.append("produtoId", transformedData.produtoId);
             formData.append("postoColetaId", transformedData.postoColetaId);
             formData.append("quantidade", transformedData.quantidade);
             formData.append("validade", transformedData.validade);
             formData.append("observacao", transformedData.observacao);
-            
-            if (data.file && data.file[0]) {
-                formData.append("file", data.file[0]);
+
+            if (transformedData.file) {
+                formData.append("file", transformedData.file);
             }
 
             await api.post("/postagem", formData, {
@@ -62,7 +61,7 @@ export function CadastroPostagem() {
             toast.success("Cadastro realizado com sucesso");
         } catch (error) {
             console.log("error: ", error);
-            toast.error(`Erro ao cadastrar: ${error.response.data.message}`);
+            toast.error(`Erro ao cadastrar: ${error.response?.data?.message || "Erro desconhecido"}`);
         }
     };
 
@@ -75,7 +74,7 @@ export function CadastroPostagem() {
                     <InputSelect label="*Posto de Coleta:" id="postoColetaId" options={postosColeta} register={register("postoColetaId")} />
                     <InputField label="*Quantidade:" placeholder="Digite a Quantidade do Produto" register={register("quantidade")} />
                     <InputField label="*Validade:" placeholder="Validade do Produto" type="date" register={register("validade")} />
-                    <InputFile label="Foto do Alimento:" register={register("file")} />
+                    <InputFile label="Foto do Alimento:" register={register} setValue={setValue} />
                     <InputField label="Observação:" placeholder="Deseja Acrescentar alguma Observação da Doação?" register={register("observacao")} />
                     <button type="submit" className="px-4 py-3 mt-6 w-full text-2xl font-bold text-center text-secondary bg-third shadow-md">
                         Finalizar
@@ -109,27 +108,27 @@ const InputSelect = ({ label, id, options, register }) => {
     );
 };
 
-const InputFile = ({ label, register }) => {
+const InputFile = ({ label, register, setValue }) => {
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setValue("file", file); // Armazena no react-hook-form
+        document.getElementById("file-label").textContent = file?.name || "Nenhum arquivo selecionado";
+    };
+
     return (
         <div className="flex flex-col gap-2 w-full">
             <label className="text-xl font-bold text-secondary">{label}</label>
-
             <input
                 type="file"
                 accept="image/*"
-                {...register}
+                {...register("file")}
                 id="file"
                 className="hidden"
-                onChange={(e) => {
-                    const fileLabel = document.getElementById("file-label");
-                    fileLabel.textContent = e.target.files[0]?.name || "Nenhum arquivo selecionado";
-                }}
+                onChange={handleFileChange} // Usa a função para capturar o arquivo
             />
-
             <label htmlFor="file" className="px-4 py-2 border border-white bg-background shadow-md text-secondary cursor-pointer">
                 Selecionar arquivo
             </label>
-
             <span id="file-label" className="text-sm text-secondary">Nenhum arquivo selecionado</span>
         </div>
     );
