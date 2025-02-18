@@ -52,8 +52,7 @@ export default function LoginPage() {
             {...register("email", { required: true })}
             id="email"
             type="email"
-            placeholder="example@gmail.com"
-            className="w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:outline-none"
+            className="w-full px-4 py-2 text-base border border-gray-300 rounded-md bg-background shadow-sm focus:ring-2 focus:ring-primary focus:outline-none"
             aria-label="Email"
           />
         </div>
@@ -66,7 +65,7 @@ export default function LoginPage() {
             {...register("senha", { required: true })}
             id="password"
             type="password"
-            className="w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:outline-none"
+            className="w-full px-4 py-2 text-base border border-gray-300 bg-background rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:outline-none"
             aria-label="Senha"
           />
         </div>
