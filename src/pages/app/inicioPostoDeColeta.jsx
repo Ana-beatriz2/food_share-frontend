@@ -29,53 +29,51 @@ export default function InicioPostoDeColeta() {
             await api.delete(`/postoColeta/${postoColetaId}`);
             alert('Posto de coleta deletado com sucesso!');
             window.location.reload();
-        } catch (error){
+        } catch (error) {
             alert(`Houve um erro ao excluir o posto de coleta: ${error.response.data.message}`);
         }
-     }
+    };
 
     return (
-            <div className="flex overflow-auto flex-col pb-20 bg-background">
-                <div className="px-4 sm:px-6 py-0 mx-auto my-0 w-full max-w-full sm:max-w-[1000px] relative">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-primary text-center my-10">
-                        Postos de Coleta
-                    </h1>
-    
-                    <button 
-                        onClick={() => navigate('/cadastroPostoDeColeta')} 
-                        className="absolute right-4 sm:right-0 top-4 sm:top-0 px-6 sm:px-10 py-2 my-10 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-                    >
-                        Cadastrar Posto de Coleta
-                    </button>
-    
-                    {error && <p className="text-red-500 text-center">{error}</p>}
-    
-                    {loading ? (
-                        <p className="text-center text-gray-500">Carregando produtos...</p>
-                    ) : (
-                        <>
-                            {postoColeta.length === 0 ? (
-                                <p className="text-center text-gray-500">Nenhum produto disponível.</p>
-                            ) : (
-                                postoColeta.map((posto) => (
-                                    <div
-                                        key={posto.id}
-                                        className="flex gap-5 p-3 mb-9 border border-zinc-300 shadow-md flex-col sm:flex-row sm:items-center"
-                                    >
-        
-                                        <div className="flex-1 text-lg sm:text-xl font-bold text-secondary">
+        <div className="flex overflow-auto flex-col pb-20 bg-background">
+            <div className="px-4 sm:px-6 py-0 mx-auto my-0 w-full max-w-full sm:max-w-[1000px] relative pt-20 sm:pt-10">
+                <h1 className="text-3xl sm:text-4xl font-bold text-primary text-center my-10">
+                    Postos de Coleta
+                </h1>
+                <button 
+                    onClick={() => navigate('/cadastroPostoDeColeta')} 
+                    className="hidden sm:block absolute right-4 sm:right-0 top-4 sm:top-0 px-6 sm:px-10 py-2 my-20 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                >
+                    Cadastrar Posto de Coleta
+                </button>
+
+                {error && <p className="text-red-500 text-center">{error}</p>}
+
+                {loading ? (
+                    <p className="text-center text-gray-500">Carregando postos de coleta...</p>
+                ) : (
+                    <>
+                        {postoColeta.length === 0 ? (
+                            <p className="text-center text-gray-500">Nenhum posto de coleta disponível.</p>
+                        ) : (
+                            postoColeta.map((posto) => (
+                                <div
+                                    key={posto.id}
+                                    className="flex gap-5 p-3 mb-9 border border-zinc-300 shadow-md flex-col sm:flex-row sm:items-center"
+                                >
+                                    <div className="flex-1 text-lg sm:text-xl font-bold text-secondary">
                                         <p>Nome: {posto.nome}</p>
                                         <p>Tipo: {posto.tipo}</p>
                                         <p>Bairro: {posto.bairro}</p>
                                         <p>Cidade: {posto.cidade}</p>
-                                        <p>Logadouro: {posto.logadouro}</p>
+                                        <p>Logradouro: {posto.logradouro}</p>
                                         <p>Complemento: {posto.complemento}</p>
                                         <p>Estado: {posto.estado}</p>
                                         <p>Ponto de Referência: {posto.ponto_referencia}</p>
                                         <p>Hora funcionamento: {formataHorariosFuncionamento(posto.Funcionamentos)}</p>
                                         <p>Dias funcionamento: {formataDiasFuncionamento(posto.Funcionamentos)}</p>
                                         <div className="flex items-center gap-4 mt-6">
-                                            <button className="p-3 bg-background rounded-md ">
+                                            <button className="p-3 bg-background rounded-md">
                                                 <img
                                                     src="src/assets/edit.png"
                                                     alt="Edit icon"
@@ -89,13 +87,13 @@ export default function InicioPostoDeColeta() {
                                                 EXCLUIR POSTO
                                             </button>
                                         </div>
-                                        </div>
                                     </div>
-                                ))
-                            )}
-                        </>
-                    )}
-                </div>
+                                </div>
+                            ))
+                        )}
+                    </>
+                )}
             </div>
-        );
+        </div>
+    );
 }
