@@ -67,83 +67,17 @@ export function CadastroPostagem() {
     };
 
     return (
-        <div className="flex overflow-hidden flex-col items-center pb-2210 min-h-screen bg-background">
-            <div className="flex flex-col items-center px-5 py-0 w-full max-w-[453px]">
-                <div className="mt-8 mb-8 text-4xl text-primary font-bold">Cadastrar Postagem</div>
-
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 mt-14 max-md:mt-10">
-                    
-
-                    <div className="flex flex-col gap-3.5">
-                        <label htmlFor="produtoId" className="text-xl font-bold text-secondary">
-                            *Nome Produto:
-                        </label>
-                        <select
-                            id="produtoId"
-                            {...register("produtoId")}
-                            className="px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-violet-200 bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5"
-                        >
-                            <option value="">Selecione o Produto</option>
-                            {produtos.map((produto) => (
-                                <option key={produto.id} value={produto.id}>
-                                    {produto.nome}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-
-                    <div className="flex flex-col gap-3.5">
-                        <label htmlFor="postoColetaId" className="text-xl font-bold text-secondary">
-                            *Posto de Coleta:
-                        </label>
-                        <select
-                            id="postoColetaId"
-                            {...register("postoColetaId")}
-                            className="px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-violet-200 bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5"
-                        >
-                            <option value="">Selecione o Posto de Coleta</option>
-                            {postosColeta.map((posto) => (
-                                <option key={posto.id} value={posto.id}>
-                                    {posto.nome}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
+        <div className="flex flex-col items-center pb-10 min-h-screen bg-background px-4">
+            <div className="flex flex-col items-center w-full max-w-md">
+                <div className="mt-8 mb-8 text-4xl text-primary font-bold text-center">Cadastrar Postagem</div>
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center gap-5 w-full">
+                    <InputSelect label="*Nome Produto:" id="produtoId" options={produtos} register={register("produtoId")} />
+                    <InputSelect label="*Posto de Coleta:" id="postoColetaId" options={postosColeta} register={register("postoColetaId")} />
                     <InputField label="*Quantidade:" placeholder="Digite a Quantidade do Produto" register={register("quantidade")} />
-                    <InputField label="*Validade:" placeholder="Validade do Produto" type="date" register={register("validade") } />
-
-
-                    <div className="flex flex-col gap-3.5">
-                        <label htmlFor="file" className="text-xl font-bold text-secondary">
-                            Foto do Alimento:
-                        </label>
-
-                        <div className="relative w-[453px]">
-                            <input
-                                id="file"
-                                type="file"
-                                accept="image/*"
-                                {...register("file")}
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            />
-                            <button
-                                type="button"
-                                className="px-4 py-3 w-full text-left text-sm text-secondary border ml-2 shadow-md hover:bg-opacity-80 transition-all bg-background"
-                                onClick={() => document.getElementById("file")?.click()}
-                            >
-                                Carregar a foto da doação
-                            </button>
-                        </div>
-                    </div>
-
+                    <InputField label="*Validade:" placeholder="Validade do Produto" type="date" register={register("validade")} />
+                    <InputFile label="Foto do Alimento:" register={register("file")} />
                     <InputField label="Observação:" placeholder="Deseja Acrescentar alguma Observação da Doação?" register={register("observacao")} />
-
-                    <button
-                        type="submit"
-                        className="px-0 py-2.5 mt-12 mb-7 w-full text-2xl font-bold text-center text-secondary bg-third cursor-pointer border-[none] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-                    >
+                    <button type="submit" className="px-4 py-3 mt-6 w-full text-2xl font-bold text-center text-secondary bg-third shadow-md">
                         Finalizar
                     </button>
                 </form>
@@ -152,22 +86,34 @@ export function CadastroPostagem() {
     );
 }
 
-
-const InputField = ({ label, placeholder, className, register, type = "text" }) => {
-    const id = React.useId();
-
+const InputField = ({ label, placeholder, register, type = "text" }) => {
     return (
-        <div className="flex flex-col gap-3.5">
-            <label htmlFor={id} className="text-xl font-bold text-secondary">
-                {label}
-            </label>
-            <input
-                id={id}
-                type={type}
-                placeholder={placeholder}
-                {...register}
-                className={`px-4 py-2 ml-4 max-w-full text-base border border-white border-solid bg-blend-normal bg-background bg-opacity-0 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] w-[453px] max-md:pr-5 ${className} placeholder-[#955306]`}
-            />
+        <div className="flex flex-col gap-2 w-full">
+            <label className="text-xl font-bold text-secondary">{label}</label>
+            <input type={type} placeholder={placeholder} {...register} className="px-4 py-2 w-full text-base border border-white bg-background shadow-md" />
+        </div>
+    );
+};
+
+const InputSelect = ({ label, id, options, register }) => {
+    return (
+        <div className="flex flex-col gap-2 w-full">
+            <label htmlFor={id} className="text-xl font-bold text-secondary">{label}</label>
+            <select id={id} {...register} className="px-4 py-2 w-full text-base border border-white bg-background shadow-md">
+                <option value="">Selecione uma opção</option>
+                {options.map((option) => (
+                    <option key={option.id} value={option.id}>{option.nome}</option>
+                ))}
+            </select>
+        </div>
+    );
+};
+
+const InputFile = ({ label, register }) => {
+    return (
+        <div className="flex flex-col gap-2 w-full">
+            <label className="text-xl font-bold text-secondary">{label}</label>
+            <input type="file" accept="image/*" {...register} className="w-full text-sm border border-white bg-background shadow-md cursor-pointer" />
         </div>
     );
 };
