@@ -1,11 +1,15 @@
-import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../../assets/logo-bege.png";
 
 export default function DefaultHeaderDoador() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
 
     return (
         <div className="h-screen flex flex-col">
@@ -35,10 +39,19 @@ export default function DefaultHeaderDoador() {
                     </div>
                 </div>
 
-                <div className="sm:hidden flex items-center">
+                <div className="flex items-center gap-4">
+                    <button className="bg-primary">
+                        <img
+                            src="src/assets/perfil-de-usuario.png"
+                            alt="User icon"
+                            className="h-[27px] w-[27px]"
+                        />
+                    </button>
+
+
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="text-third focus:outline-none bg-primary"
+                        className="sm:hidden text-third focus:outline-none bg-primary"
                     >
                         <img
                             src="src/assets/menu-aberto.png"
@@ -47,14 +60,6 @@ export default function DefaultHeaderDoador() {
                         />
                     </button>
                 </div>
-
-                <button className="bg-primary">
-                    <img
-                        src="src/assets/perfil-de-usuario.png"
-                        alt="User icon"
-                        className="h-[27px] w-[27px]"
-                    />
-                </button>
             </header>
 
             {isMenuOpen && (
@@ -76,6 +81,12 @@ export default function DefaultHeaderDoador() {
                         className="bg-primary text-third px-4 py-2 rounded-lg font-bold"
                     >
                         Posto de Coleta
+                    </button>
+                    <button 
+                        onClick={handleLogout} 
+                        className="text-third px-4 py-2 font-bold bg-primary transition duration-300"
+                    >
+                        Logout
                     </button>
                 </div>
             )}
