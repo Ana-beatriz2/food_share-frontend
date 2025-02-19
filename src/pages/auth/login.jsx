@@ -4,15 +4,16 @@ import Logo from "@/components/ui/logo";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify';
+import api from "@/services/api";
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const baseUrl = "http://localhost:3000/api";
+  const baseUrl = "http://192.168.1.64:3000/api";
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`${baseUrl}/login`, data);
+      const response = await api.post(`${baseUrl}/login`, data);
       const token = response.data;
 
       const userId = jwtDecode(token).id;
