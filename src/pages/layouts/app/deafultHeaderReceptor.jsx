@@ -41,12 +41,6 @@ export default function DefaultHeaderReceptor() {
                             className="h-[27px] w-[27px]"
                         />
                     </button>
-                    <button 
-                        onClick={handleLogout} 
-                        className="bg-transparent text-black border border-red-600 px-4 py-2 rounded-lg font-bold transition duration-300 hover:bg-red-600 hover:text-white"
-                    >
-                        Logout
-                    </button>
 
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -77,7 +71,7 @@ export default function DefaultHeaderReceptor() {
                     </button>
                     <button 
                         onClick={handleLogout} 
-                        className="bg-transparent text-black border border-red-600 px-4 py-2 rounded-lg font-bold transition duration-300 hover:bg-red-600 hover:text-white"
+                        className="text-third px-4 py-2 font-bold bg-primary transition duration-300"
                     >
                         Logout
                     </button>
