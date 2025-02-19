@@ -43,7 +43,7 @@ export default function InicioPostoDeColeta() {
                 </h1>
                 <button 
                     onClick={() => navigate('/cadastroPostoDeColeta')} 
-                    className="sm:hidden block mx-auto mb-10 px-6 sm:px-10 py-2 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                    className=" block mx-auto mb-10 px-6 sm:px-10 py-2 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 >
                     Cadastrar Posto de Coleta
                 </button>

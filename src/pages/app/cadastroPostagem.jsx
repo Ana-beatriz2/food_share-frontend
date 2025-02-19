@@ -61,7 +61,7 @@ export function CadastroPostagem() {
             });
 
             toast.success("Cadastro realizado com sucesso");
-            navigate('/login');
+            navigate('/doacoesDoador');
         } catch (error) {
             console.log("error: ", error);
             toast.error(`Erro ao cadastrar: ${error.response?.data?.message || "Erro desconhecido"}`);

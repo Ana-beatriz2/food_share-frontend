@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";import axios from "axios";
 import Logo from "@/components/ui/logo";
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export function UserRegister() {
   const { register, handleSubmit } = useForm();
   const baseUrl = "http://localhost:3000/api"
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -17,7 +19,8 @@ export function UserRegister() {
       });
 
       await axios.post(`${baseUrl}/usuario`, transformedData);
-      toast.success("Cadastro realizado com sucesso")
+      toast.success("Cadastro realizado com sucesso");
+      navigate('/login');
     } catch (error) {
       toast.error(`Erro ao cadastrar: ${error.response.data.message}`);
     }

@@ -87,6 +87,7 @@ export default function DetalhesPostagemDoador() {
                         <p>Dias disponíveis para retirada: {formataDiasFuncionamento(postagem.PostoColetum.Funcionamentos)}</p>
                         <p>Horários disponíveis para retirada, respectivamente: {formataHorariosFuncionamento(postagem.PostoColetum.Funcionamentos)}</p>
                         <p>Contato Doador: {postagem.Usuario.telefone}</p>
+                        <p>Observação: {postagem.observacao}</p>
 
                         <div className="flex gap-4 mt-20">
                             <button onClick={() => navigate('/doacoesDoador')} className="px-8 py-2.5 text-sm text-secondary font-bold bg-third shadow-md">
