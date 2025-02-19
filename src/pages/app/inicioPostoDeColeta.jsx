@@ -38,12 +38,12 @@ export default function InicioPostoDeColeta() {
     return (
         <div className="flex overflow-auto flex-col pb-20 bg-background">
             <div className="px-4 sm:px-6 py-0 mx-auto my-0 w-full max-w-full sm:max-w-[1000px] relative pt-20 sm:pt-10">
-                <h1 className="text-3xl sm:text-4xl font-bold text-primary text-center my-10">
+                <h1 className="text-3xl sm:text-4xl font-bold text-primary text-center my-6">
                     Postos de Coleta
                 </h1>
                 <button 
                     onClick={() => navigate('/cadastroPostoDeColeta')} 
-                    className="hidden sm:block absolute right-4 sm:right-0 top-4 sm:top-0 px-6 sm:px-10 py-2 my-20 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                    className="sm:hidden block mx-auto mb-10 px-6 sm:px-10 py-2 rounded-md text-base font-bold text-secondary bg-third cursor-pointer shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 >
                     Cadastrar Posto de Coleta
                 </button>

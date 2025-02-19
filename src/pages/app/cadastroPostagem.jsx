@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 import api from "@/services/api";
 
 export function CadastroPostagem() {
     const { register, handleSubmit, setValue } = useForm();
     const [produtos, setProdutos] = useState([]);
     const [postosColeta, setPostosColeta] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProdutos = async () => {
@@ -59,6 +61,7 @@ export function CadastroPostagem() {
             });
 
             toast.success("Cadastro realizado com sucesso");
+            navigate('/login');
         } catch (error) {
             console.log("error: ", error);
             toast.error(`Erro ao cadastrar: ${error.response?.data?.message || "Erro desconhecido"}`);
